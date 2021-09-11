@@ -6,6 +6,5 @@ class ApiProvider {
     companion object {
         val instance: ApiService = RetrofitHelper.getInstance(BuildConfig.API_URL)
             .create(ApiService::class.java)
-
     }
 }
