@@ -13,6 +13,9 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField 'String', 'API_URL', '"https://api.flickr.com/services/"'
+        buildConfigField 'String', 'API_KEY', '"07ec369c480d7acb3df4c7cfa062f1c3"'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
