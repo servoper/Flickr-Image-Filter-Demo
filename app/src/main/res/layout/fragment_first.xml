@@ -7,10 +7,12 @@
     tools:context=".ui.photoslist.PhotosFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/potos_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:paddingStart="@dimen/padding_horizontal"
         android:paddingEnd="@dimen/padding_horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

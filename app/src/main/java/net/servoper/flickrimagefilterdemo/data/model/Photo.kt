@@ -12,5 +12,11 @@ data class Photo(
     @SerializedName("ownername")
     val ownerName: String,
     @SerializedName("dateadded")
-    val dateAdded: String
+    val dateAdded: String,
+    @SerializedName("farm")
+    val farmId: String,
+    @SerializedName("server")
+    val serverId: String,
+    @SerializedName("secret")
+    val secret: String
 )
