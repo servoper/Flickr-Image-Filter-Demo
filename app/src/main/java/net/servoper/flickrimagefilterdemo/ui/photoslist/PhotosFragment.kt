@@ -1,12 +1,12 @@
 package net.servoper.flickrimagefilterdemo.ui.photoslist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import net.servoper.flickrimagefilterdemo.data.model.Photo
 import net.servoper.flickrimagefilterdemo.databinding.FragmentFirstBinding
 
 /**
@@ -14,19 +14,21 @@ import net.servoper.flickrimagefilterdemo.databinding.FragmentFirstBinding
  */
 class PhotosFragment : Fragment() {
 
+    private lateinit var mAdapter: PhotosAdapter
     private var _binding: FragmentFirstBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-
     private val model: PhotosViewModel by activityViewModels()
+
+    private val mPhotos = ArrayList<Photo>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -36,9 +38,17 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mAdapter = PhotosAdapter(mPhotos)
+
+        binding.potosRecyclerView.adapter = mAdapter
+
         model.requestPhotos()
 
-/*
+        model.photosLiveData.observe(viewLifecycleOwner, {
+            mPhotos.addAll(it)
+            mAdapter.notifyItemRangeInserted(0, it.size)
+        })
+        /*
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }

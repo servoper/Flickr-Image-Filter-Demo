@@ -13,7 +13,7 @@ class PhotosViewModel : ViewModel() {
 
     private val mRepository = PhotosRepository()
 
-    private val mPhotosLiveData = MutableLiveData<ArrayList<Photo>>()
+    val photosLiveData = MutableLiveData<ArrayList<Photo>>()
 
     fun requestPhotos(page: Int? = null) {
         viewModelScope.launch {
@@ -22,7 +22,7 @@ class PhotosViewModel : ViewModel() {
                     mRepository.getPhotosList(page)
                 }
             }.onSuccess {
-                mPhotosLiveData.postValue(it?.data?.photosList)
+                photosLiveData.postValue(it?.data?.photosList)
             }.onFailure {
                 it.printStackTrace()
             }
