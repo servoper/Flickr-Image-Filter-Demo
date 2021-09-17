@@ -1,5 +1,8 @@
 package net.servoper.flickrimagefilterdemo.ui.editphoto
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import android.widget.SeekBar
@@ -9,15 +12,9 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
 import net.servoper.flickrimagefilterdemo.R
 import net.servoper.flickrimagefilterdemo.databinding.FragmentEditPhotoBinding
-import java.lang.Exception
-import android.content.Intent
-import android.graphics.Bitmap
-
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import com.squareup.picasso.Target
 
 
 /**
@@ -65,6 +62,27 @@ class EditPhotoFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        loadImage()
+
+        attachFiltersListeners()
+
+        model.errorLiveData.observe(viewLifecycleOwner, {
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG).show()
+        })
+
+        model.sharingFileLiveData.observe(viewLifecycleOwner, { event ->
+            event.contentIfNotHandled?.let {
+                val share = Intent(Intent.ACTION_SEND)
+                share.type = "image/jpeg"
+                share.putExtra(Intent.EXTRA_STREAM, it)
+                startActivity(Intent.createChooser(share, getString(R.string.share_conten_title)))
+            }
+        })
+    }
+
     private fun startSharing() {
         Picasso.get()
             .load(args.imageUrl)
@@ -86,25 +104,6 @@ class EditPhotoFragment : Fragment() {
                 }
 
             })
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        loadImage()
-
-        attachFiltersListeners()
-
-        model.sharingFileLiveData.observe(viewLifecycleOwner, {
-            val share = Intent(Intent.ACTION_SEND)
-            share.type = "image/jpeg"
-            share.putExtra(Intent.EXTRA_STREAM, it)
-            startActivity(Intent.createChooser(share, getString(R.string.share_conten_title)))
-        })
-
-        model.errorLiveData.observe(viewLifecycleOwner, {
-            Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG).show()
-        })
     }
 
     private fun attachFiltersListeners() {

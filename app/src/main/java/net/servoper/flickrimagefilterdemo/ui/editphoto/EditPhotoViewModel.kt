@@ -9,11 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.servoper.flickrimagefilterdemo.repository.EditPhotoRepository
+import net.servoper.flickrimagefilterdemo.ui.custom.Event
 
 class EditPhotoViewModel : ViewModel() {
     private val mEditPhotoRepository = EditPhotoRepository()
 
-    val sharingFileLiveData = MutableLiveData<Uri>()
+    val sharingFileLiveData = MutableLiveData<Event<Uri>>()
     val errorLiveData = MutableLiveData<String>()
 
     fun prepareImageForSharing(
@@ -31,7 +32,7 @@ class EditPhotoViewModel : ViewModel() {
                     )
                 }
             }.onSuccess {
-                sharingFileLiveData.postValue(it)
+                sharingFileLiveData.postValue(Event(it))
             }.onFailure {
                 errorLiveData.postValue(it.message)
             }
