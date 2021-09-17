@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import net.servoper.flickrimagefilterdemo.R
 import net.servoper.flickrimagefilterdemo.data.FlickrImageUrlBuilder
 import net.servoper.flickrimagefilterdemo.data.model.Photo
+import net.servoper.flickrimagefilterdemo.data.provider.network.PHOTOS_PER_PAGE
 import net.servoper.flickrimagefilterdemo.databinding.FragmentPhotosListBinding
 import net.servoper.flickrimagefilterdemo.ui.custom.RecyclerItemClickListener
 
@@ -30,6 +33,8 @@ class PhotosListFragment : Fragment() {
     private val model: PhotosViewModel by activityViewModels()
 
     private val mPhotos = ArrayList<Photo>()
+
+    private var mLastPageRequested = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,11 +63,31 @@ class PhotosListFragment : Fragment() {
 
         model.photosLiveData.observe(viewLifecycleOwner, {
             mPhotos.addAll(it)
-            mAdapter.notifyItemRangeInserted(0, it.size)
+            mAdapter.notifyItemRangeInserted(mPhotos.size - it.size, it.size)
+            mLastPageRequested++
         })
 
         model.errorLiveData.observe(viewLifecycleOwner, {
             Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG).show()
+        })
+
+        setRecyclerViewScrollListener()
+    }
+
+
+    private fun setRecyclerViewScrollListener() {
+        binding.potosRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                recyclerView.layoutManager?.let {
+                    val pageToRequest = it.itemCount / PHOTOS_PER_PAGE + 1
+                    if (it.itemCount - 3 <= (it as GridLayoutManager)
+                            .findLastVisibleItemPosition() && pageToRequest > mLastPageRequested
+                    ) {
+                        model.requestPhotos(pageToRequest)
+                    }
+                }
+            }
         })
     }
 
