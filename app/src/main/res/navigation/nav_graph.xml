@@ -3,26 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/PhotosListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="net.servoper.flickrimagefilterdemo.ui.photoslist.PhotosFragment"
+        android:id="@+id/PhotosListFragment"
+        android:name="net.servoper.flickrimagefilterdemo.ui.photoslist.PhotosListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_photos_list">
+
+        <argument
+            android:name="imageUrl"
+            android:defaultValue=""
+            app:argType="string" />
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_PhotosList_to_EditPhoto"
+            app:destination="@id/EditPhotoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="net.servoper.flickrimagefilterdemo.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/EditPhotoFragment"
+        android:name="net.servoper.flickrimagefilterdemo.ui.editphoto.EditPhotoFragment"
+        android:label="@string/edit_photo_fragment_label"
+        tools:layout="@layout/fragment_edit_photo">
+
+        <argument
+            android:name="imageUrl"
+            android:defaultValue=""
+            app:argType="string" />
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_EditPhoto_to_PhotosList"
+            app:destination="@id/PhotosListFragment" />
     </fragment>
 </navigation>
