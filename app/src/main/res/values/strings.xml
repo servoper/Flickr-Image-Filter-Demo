@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Kiteboarding group Flickr</string>
-    <string name="edit_photo_fragment_label">Kiteboarding group</string>
+    <string name="edit_photo_fragment_label">Edit Photo</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -15,4 +15,5 @@
     <string name="saturation">Saturation</string>
     <string name="brightness">Brightness</string>
     <string name="contrast">Contrast</string>
+    <string name="share_conten_title">Share Image</string>
 </resources>

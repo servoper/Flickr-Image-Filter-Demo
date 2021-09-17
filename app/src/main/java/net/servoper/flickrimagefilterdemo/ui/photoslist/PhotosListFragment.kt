@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import net.servoper.flickrimagefilterdemo.R
 import net.servoper.flickrimagefilterdemo.data.FlickrImageUrlBuilder
 import net.servoper.flickrimagefilterdemo.data.model.Photo
@@ -58,6 +59,10 @@ class PhotosListFragment : Fragment() {
         model.photosLiveData.observe(viewLifecycleOwner, {
             mPhotos.addAll(it)
             mAdapter.notifyItemRangeInserted(0, it.size)
+        })
+
+        model.errorLiveData.observe(viewLifecycleOwner, {
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG).show()
         })
     }
 
