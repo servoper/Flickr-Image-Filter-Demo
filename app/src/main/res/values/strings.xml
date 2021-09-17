@@ -12,4 +12,7 @@
 
     <!-- http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg -->
     <string name="flick_image_url">http://farm%s.staticflickr.com/%s/%s_%s.jpg</string>
+    <string name="saturation">Saturation</string>
+    <string name="brightness">Brightness</string>
+    <string name="contrast">Contrast</string>
 </resources>

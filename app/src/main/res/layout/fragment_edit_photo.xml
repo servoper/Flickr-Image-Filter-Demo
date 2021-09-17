@@ -6,4 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".ui.editphoto.EditPhotoFragment">
 
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/image_filter_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/vertical_space_large"
+        app:layout_constraintBottom_toTopOf="@id/contrast_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/contrast_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_space_small"
+        android:text="@string/contrast"
+        app:layout_constraintBottom_toTopOf="@id/contrast_seek_bar"
+        app:layout_constraintStart_toStartOf="@id/contrast_seek_bar" />
+
+    <TextView
+        android:id="@+id/contrast_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_space_small"
+        app:layout_constraintBottom_toTopOf="@id/contrast_seek_bar"
+        app:layout_constraintEnd_toEndOf="@id/contrast_seek_bar"
+        tools:text="0.21" />
+
+    <SeekBar
+        android:id="@+id/contrast_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_space"
+        android:layout_marginEnd="@dimen/horizontal_space"
+        android:layout_marginBottom="@dimen/vertical_space_large"
+        android:max="200"
+        app:layout_constraintBottom_toBottomOf="@id/brightness_label" />
+
+    <TextView
+        android:id="@+id/brightness_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_space_small"
+        android:text="@string/brightness"
+        app:layout_constraintBottom_toTopOf="@id/brightness_seek_bar"
+        app:layout_constraintStart_toStartOf="@id/brightness_seek_bar" />
+
+    <TextView
+        android:id="@+id/brightness_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_space_small"
+        app:layout_constraintBottom_toTopOf="@id/brightness_seek_bar"
+        app:layout_constraintEnd_toEndOf="@id/brightness_seek_bar"
+        tools:text="0.21" />
+
+    <SeekBar
+        android:id="@+id/brightness_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_space"
+        android:layout_marginEnd="@dimen/horizontal_space"
+        android:layout_marginBottom="@dimen/vertical_space_large"
+        android:max="200"
+        app:layout_constraintBottom_toBottomOf="@id/saturation_label" />
+
+    <TextView
+        android:id="@+id/saturation_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_space_small"
+        android:text="@string/saturation"
+        app:layout_constraintBottom_toTopOf="@id/saturation_seek_bar"
+        app:layout_constraintStart_toStartOf="@id/saturation_seek_bar" />
+
+    <TextView
+        android:id="@+id/saturation_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_space_small"
+        app:layout_constraintBottom_toTopOf="@id/saturation_seek_bar"
+        app:layout_constraintEnd_toEndOf="@id/saturation_seek_bar"
+        tools:text="0.21" />
+
+    <SeekBar
+        android:id="@+id/saturation_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_space"
+        android:layout_marginEnd="@dimen/horizontal_space"
+        android:layout_marginBottom="@dimen/vertical_space_large"
+        android:max="200"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

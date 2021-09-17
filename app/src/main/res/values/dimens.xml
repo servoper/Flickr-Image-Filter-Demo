@@ -1,6 +1,11 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="photo_details_gap">8dp</dimen>
+
     <dimen name="text_small">12sp</dimen>
     <dimen name="text_drawable_padding">5dp</dimen>
+
+    <dimen name="vertical_space_large">30dp</dimen>
+    <dimen name="vertical_space_small">10dp</dimen>
+
+    <dimen name="horizontal_space">16dp</dimen>
 </resources>
